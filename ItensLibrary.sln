@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItensLibrary", "ItensLibrary\ItensLibrary.csproj", "{87C314E4-F233-4479-ADFF-B5E2EC917EEC}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{87C314E4-F233-4479-ADFF-B5E2EC917EEC}.Debug.ActiveCfg = Debug|.NET
+		{87C314E4-F233-4479-ADFF-B5E2EC917EEC}.Debug.Build.0 = Debug|.NET
+		{87C314E4-F233-4479-ADFF-B5E2EC917EEC}.Release.ActiveCfg = Release|.NET
+		{87C314E4-F233-4479-ADFF-B5E2EC917EEC}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
