@@ -4,13 +4,11 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
-using System.IO;
 
 namespace ItensLibrary
 {
-	public class UserControlFilmes : System.Windows.Forms.UserControl
+	public class UserControlJogos : System.Windows.Forms.UserControl
 	{
-		#region WindowsForms Controls
 		private System.Windows.Forms.TabControl tabControlFilmes;
 		private System.Windows.Forms.TabPage tabPagePesquisar;
 		private System.Windows.Forms.TabPage tabPageAssistidos;
@@ -25,15 +23,20 @@ namespace ItensLibrary
 		private System.Windows.Forms.Button btnImagemFilme;
 		private System.Windows.Forms.Button btnGravar;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
+		private System.Windows.Forms.ComboBox ddlTipoMidiaFilme;
+		private System.Windows.Forms.ComboBox ddlGeneroFilme;
 		private System.Windows.Forms.TextBox txtNomeFilme;
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.ComboBox comboBox1;
 		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.ComboBox comboBox2;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Button btnPesquisar;
 		private System.Windows.Forms.DataGrid dataGrid1;
+		private System.Windows.Forms.ComboBox comboBox3;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Button btnNovoGenero;
 		private System.Windows.Forms.Button btnNovoTipoMidia;
@@ -42,110 +45,27 @@ namespace ItensLibrary
 		private System.Windows.Forms.RadioButton radioButton2;
 		private System.Windows.Forms.RadioButton radioButton3;
 		private System.Windows.Forms.DataGrid dataGrid2;
+		private System.Windows.Forms.CheckedListBox checkedListBox1;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.ComboBox ddlLocalizacao;
 		private System.Windows.Forms.Label lblLocalizacao;
 		private System.Windows.Forms.Button btnLocalizacao;
-		#endregion
 		
-		#region Propriedades
-		byte[] binaryImagedata;
-		#endregion
-		private System.Windows.Forms.ComboBox ddlTipoMidiaFilmePesquisa;
-		private System.Windows.Forms.ComboBox ddlGeneroFilmePesquisa;
-		private System.Windows.Forms.ComboBox ddlLocalizacaoAdicionar;
-		private System.Windows.Forms.ComboBox ddlTipoMidiaFilmeAdicionar;
-		private System.Windows.Forms.ComboBox ddlGeneroFilmeAdicionar;
-		private System.Windows.Forms.ComboBox ddlTipoMidiaFilmeAssistidos;
-		private System.Windows.Forms.CheckedListBox clbPessoa;
-
-		private Filme filmeAtual;
-
-		public Filme FilmeAtual
-		{
-			get
-			{
-				return filmeAtual;
-			}
-			set
-			{
-				filmeAtual = value;
-			}
-		}
-
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		public UserControlFilmes(Filme filme)
+		public UserControlJogos()
 		{
-			FilmeAtual = filme;
-
 			// This call is required by the Windows.Forms Form Designer.
 			InitializeComponent();
-			
-			InicializaCombos();
-		}
 
-		private void InicializaCombos()
-		{
-			DataTable dtSource;
-			DataRow dtRow;
-			
-			#region Aba Adicionar
-			dtSource = ItensLibrary.DO.GeneroFilmeDO.Listar();
-			dtRow = dtSource.NewRow();
-			dtRow["nsu_Genero"] = 0;
-			dtRow["nm_Genero"] = "(Selecionar)";
-			dtSource.Rows.InsertAt(dtRow,0);
-			ddlGeneroFilmeAdicionar.DataSource = dtSource;
+			// TODO: Add any initialization after the InitializeComponent call
 
-			dtSource = ItensLibrary.DO.TipoMidiaFilmeDO.Listar();
-			dtRow = dtSource.NewRow();
-			dtRow["nsu_TipoMidia"] = 0;
-			dtRow["nm_TipoMidia"] = "(Selecionar)";
-			dtSource.Rows.InsertAt(dtRow,0);
-			ddlTipoMidiaFilmeAdicionar.DataSource = dtSource;
-
-			dtSource = ItensLibrary.DO.LocalizacaoDO.Listar();
-			dtRow = dtSource.NewRow();
-			dtRow["nsu_Localizacao"] = 0;
-			dtRow["nm_Localizacao"] = "(Selecionar)";
-			dtSource.Rows.InsertAt(dtRow,0);
-			ddlLocalizacaoAdicionar.DataSource = dtSource;
-			#endregion
-
-			#region Aba Pesquisar
-			dtSource = ItensLibrary.DO.GeneroFilmeDO.Listar();
-			dtRow = dtSource.NewRow();
-			dtRow["nsu_Genero"] = 0;
-			dtRow["nm_Genero"] = "(Todos os Gêneros)";
-			dtSource.Rows.InsertAt(dtRow,0);
-			ddlGeneroFilmePesquisa.DataSource = dtSource;
-			
-			dtSource = ItensLibrary.DO.TipoMidiaFilmeDO.Listar();
-			dtRow = dtSource.NewRow();
-			dtRow["nsu_TipoMidia"] = 0;
-			dtRow["nm_TipoMidia"] = "(Todos os Tipos de Mídia)";
-			dtSource.Rows.InsertAt(dtRow,0);
-			ddlTipoMidiaFilmePesquisa.DataSource = dtSource;
-			#endregion
-
-			#region Aba Assistidos
-			dtSource = ItensLibrary.DO.TipoMidiaFilmeDO.Listar();
-			dtRow = dtSource.NewRow();
-			dtRow["nsu_TipoMidia"] = 0;
-			dtRow["nm_TipoMidia"] = "(Todos os Tipos de Mídia)";
-			dtSource.Rows.InsertAt(dtRow,0);
-			ddlTipoMidiaFilmeAssistidos.DataSource = dtSource;
-			#endregion
-
-			dtSource = ItensLibrary.DO.PessoaDO.Listar();
-			clbPessoa.DataSource = dtSource;
-			clbPessoa.DisplayMember = "nm_Pessoa";
 		}
 
 		/// <summary> 
@@ -178,9 +98,9 @@ namespace ItensLibrary
 			this.lblAssistidos = new System.Windows.Forms.Label();
 			this.dataGrid1 = new System.Windows.Forms.DataGrid();
 			this.btnPesquisar = new System.Windows.Forms.Button();
-			this.ddlTipoMidiaFilmePesquisa = new System.Windows.Forms.ComboBox();
+			this.comboBox2 = new System.Windows.Forms.ComboBox();
 			this.label4 = new System.Windows.Forms.Label();
-			this.ddlGeneroFilmePesquisa = new System.Windows.Forms.ComboBox();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
@@ -189,24 +109,24 @@ namespace ItensLibrary
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.label6 = new System.Windows.Forms.Label();
-			this.clbPessoa = new System.Windows.Forms.CheckedListBox();
+			this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
 			this.dataGrid2 = new System.Windows.Forms.DataGrid();
-			this.ddlTipoMidiaFilmeAssistidos = new System.Windows.Forms.ComboBox();
+			this.comboBox3 = new System.Windows.Forms.ComboBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tabPageAdicionar = new System.Windows.Forms.TabPage();
 			this.btnLocalizacao = new System.Windows.Forms.Button();
 			this.lblLocalizacao = new System.Windows.Forms.Label();
-			this.ddlLocalizacaoAdicionar = new System.Windows.Forms.ComboBox();
+			this.ddlLocalizacao = new System.Windows.Forms.ComboBox();
 			this.btnNovoTipoMidia = new System.Windows.Forms.Button();
 			this.btnNovoGenero = new System.Windows.Forms.Button();
 			this.btnGravar = new System.Windows.Forms.Button();
 			this.btnImagemFilme = new System.Windows.Forms.Button();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.labelImagemFilme = new System.Windows.Forms.Label();
-			this.ddlTipoMidiaFilmeAdicionar = new System.Windows.Forms.ComboBox();
-			this.ddlGeneroFilmeAdicionar = new System.Windows.Forms.ComboBox();
+			this.ddlTipoMidiaFilme = new System.Windows.Forms.ComboBox();
+			this.ddlGeneroFilme = new System.Windows.Forms.ComboBox();
 			this.dateTimePickerDataAquisicaoFilme = new System.Windows.Forms.DateTimePicker();
 			this.labelDataAquisicao = new System.Windows.Forms.Label();
 			this.labelTipoMidia = new System.Windows.Forms.Label();
@@ -241,9 +161,9 @@ namespace ItensLibrary
 			this.tabPagePesquisar.Controls.Add(this.lblAssistidos);
 			this.tabPagePesquisar.Controls.Add(this.dataGrid1);
 			this.tabPagePesquisar.Controls.Add(this.btnPesquisar);
-			this.tabPagePesquisar.Controls.Add(this.ddlTipoMidiaFilmePesquisa);
+			this.tabPagePesquisar.Controls.Add(this.comboBox2);
 			this.tabPagePesquisar.Controls.Add(this.label4);
-			this.tabPagePesquisar.Controls.Add(this.ddlGeneroFilmePesquisa);
+			this.tabPagePesquisar.Controls.Add(this.comboBox1);
 			this.tabPagePesquisar.Controls.Add(this.label3);
 			this.tabPagePesquisar.Controls.Add(this.textBox2);
 			this.tabPagePesquisar.Controls.Add(this.label2);
@@ -299,14 +219,13 @@ namespace ItensLibrary
 			this.btnPesquisar.TabIndex = 12;
 			this.btnPesquisar.Text = "Pesquisar";
 			// 
-			// ddlTipoMidiaFilmePesquisa
+			// comboBox2
 			// 
-			this.ddlTipoMidiaFilmePesquisa.DisplayMember = "nm_TipoMidia";
-			this.ddlTipoMidiaFilmePesquisa.Location = new System.Drawing.Point(120, 80);
-			this.ddlTipoMidiaFilmePesquisa.Name = "ddlTipoMidiaFilmePesquisa";
-			this.ddlTipoMidiaFilmePesquisa.Size = new System.Drawing.Size(224, 21);
-			this.ddlTipoMidiaFilmePesquisa.TabIndex = 10;
-			this.ddlTipoMidiaFilmePesquisa.ValueMember = "nsu_TipoMidia";
+			this.comboBox2.Location = new System.Drawing.Point(120, 80);
+			this.comboBox2.Name = "comboBox2";
+			this.comboBox2.Size = new System.Drawing.Size(224, 21);
+			this.comboBox2.TabIndex = 10;
+			this.comboBox2.Text = "(Todos os Tipos de Mídia)";
 			// 
 			// label4
 			// 
@@ -315,14 +234,13 @@ namespace ItensLibrary
 			this.label4.TabIndex = 9;
 			this.label4.Text = "Tipo de Mídia:";
 			// 
-			// ddlGeneroFilmePesquisa
+			// comboBox1
 			// 
-			this.ddlGeneroFilmePesquisa.DisplayMember = "nm_Genero";
-			this.ddlGeneroFilmePesquisa.Location = new System.Drawing.Point(120, 48);
-			this.ddlGeneroFilmePesquisa.Name = "ddlGeneroFilmePesquisa";
-			this.ddlGeneroFilmePesquisa.Size = new System.Drawing.Size(224, 21);
-			this.ddlGeneroFilmePesquisa.TabIndex = 8;
-			this.ddlGeneroFilmePesquisa.ValueMember = "nsu_Genero";
+			this.comboBox1.Location = new System.Drawing.Point(120, 48);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(224, 21);
+			this.comboBox1.TabIndex = 8;
+			this.comboBox1.Text = "(Todos os Gêneros)";
 			// 
 			// label3
 			// 
@@ -352,9 +270,9 @@ namespace ItensLibrary
 			this.tabPageAssistidos.Controls.Add(this.button2);
 			this.tabPageAssistidos.Controls.Add(this.button1);
 			this.tabPageAssistidos.Controls.Add(this.label6);
-			this.tabPageAssistidos.Controls.Add(this.clbPessoa);
+			this.tabPageAssistidos.Controls.Add(this.checkedListBox1);
 			this.tabPageAssistidos.Controls.Add(this.dataGrid2);
-			this.tabPageAssistidos.Controls.Add(this.ddlTipoMidiaFilmeAssistidos);
+			this.tabPageAssistidos.Controls.Add(this.comboBox3);
 			this.tabPageAssistidos.Controls.Add(this.label5);
 			this.tabPageAssistidos.Controls.Add(this.textBox1);
 			this.tabPageAssistidos.Controls.Add(this.label1);
@@ -394,33 +312,29 @@ namespace ItensLibrary
 			this.label6.TabIndex = 13;
 			this.label6.Text = "Assistido Por:";
 			// 
-			// clbPessoa
+			// checkedListBox1
 			// 
-			this.clbPessoa.Location = new System.Drawing.Point(128, 264);
-			this.clbPessoa.Name = "clbPessoa";
-			this.clbPessoa.Size = new System.Drawing.Size(440, 94);
-			this.clbPessoa.TabIndex = 12;
-			this.clbPessoa.Tag = "nm_Pessoa";
+			this.checkedListBox1.Location = new System.Drawing.Point(128, 264);
+			this.checkedListBox1.Name = "checkedListBox1";
+			this.checkedListBox1.Size = new System.Drawing.Size(440, 94);
+			this.checkedListBox1.TabIndex = 12;
 			// 
 			// dataGrid2
 			// 
-			this.dataGrid2.CaptionVisible = false;
 			this.dataGrid2.DataMember = "";
 			this.dataGrid2.HeaderForeColor = System.Drawing.SystemColors.ControlText;
 			this.dataGrid2.Location = new System.Drawing.Point(8, 88);
 			this.dataGrid2.Name = "dataGrid2";
-			this.dataGrid2.ReadOnly = true;
 			this.dataGrid2.Size = new System.Drawing.Size(560, 128);
 			this.dataGrid2.TabIndex = 11;
 			// 
-			// ddlTipoMidiaFilmeAssistidos
+			// comboBox3
 			// 
-			this.ddlTipoMidiaFilmeAssistidos.DisplayMember = "nm_TipoMidia";
-			this.ddlTipoMidiaFilmeAssistidos.Location = new System.Drawing.Point(120, 48);
-			this.ddlTipoMidiaFilmeAssistidos.Name = "ddlTipoMidiaFilmeAssistidos";
-			this.ddlTipoMidiaFilmeAssistidos.Size = new System.Drawing.Size(224, 21);
-			this.ddlTipoMidiaFilmeAssistidos.TabIndex = 10;
-			this.ddlTipoMidiaFilmeAssistidos.ValueMember = "nsu_TipoMidia";
+			this.comboBox3.Location = new System.Drawing.Point(120, 48);
+			this.comboBox3.Name = "comboBox3";
+			this.comboBox3.Size = new System.Drawing.Size(224, 21);
+			this.comboBox3.TabIndex = 10;
+			this.comboBox3.Text = "(Todos os Tipos de Mídia)";
 			// 
 			// label5
 			// 
@@ -448,15 +362,15 @@ namespace ItensLibrary
 			// 
 			this.tabPageAdicionar.Controls.Add(this.btnLocalizacao);
 			this.tabPageAdicionar.Controls.Add(this.lblLocalizacao);
-			this.tabPageAdicionar.Controls.Add(this.ddlLocalizacaoAdicionar);
+			this.tabPageAdicionar.Controls.Add(this.ddlLocalizacao);
 			this.tabPageAdicionar.Controls.Add(this.btnNovoTipoMidia);
 			this.tabPageAdicionar.Controls.Add(this.btnNovoGenero);
 			this.tabPageAdicionar.Controls.Add(this.btnGravar);
 			this.tabPageAdicionar.Controls.Add(this.btnImagemFilme);
 			this.tabPageAdicionar.Controls.Add(this.pictureBox1);
 			this.tabPageAdicionar.Controls.Add(this.labelImagemFilme);
-			this.tabPageAdicionar.Controls.Add(this.ddlTipoMidiaFilmeAdicionar);
-			this.tabPageAdicionar.Controls.Add(this.ddlGeneroFilmeAdicionar);
+			this.tabPageAdicionar.Controls.Add(this.ddlTipoMidiaFilme);
+			this.tabPageAdicionar.Controls.Add(this.ddlGeneroFilme);
 			this.tabPageAdicionar.Controls.Add(this.dateTimePickerDataAquisicaoFilme);
 			this.tabPageAdicionar.Controls.Add(this.labelDataAquisicao);
 			this.tabPageAdicionar.Controls.Add(this.labelTipoMidia);
@@ -476,7 +390,6 @@ namespace ItensLibrary
 			this.btnLocalizacao.Size = new System.Drawing.Size(176, 23);
 			this.btnLocalizacao.TabIndex = 16;
 			this.btnLocalizacao.Text = "Cadastrar Nova Localização";
-			this.btnLocalizacao.Click += new System.EventHandler(this.btnLocalizacao_Click);
 			// 
 			// lblLocalizacao
 			// 
@@ -485,15 +398,13 @@ namespace ItensLibrary
 			this.lblLocalizacao.TabIndex = 15;
 			this.lblLocalizacao.Text = "Localização:";
 			// 
-			// ddlLocalizacaoAdicionar
+			// ddlLocalizacao
 			// 
-			this.ddlLocalizacaoAdicionar.DisplayMember = "nm_Localizacao";
-			this.ddlLocalizacaoAdicionar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.ddlLocalizacaoAdicionar.Location = new System.Drawing.Point(360, 168);
-			this.ddlLocalizacaoAdicionar.Name = "ddlLocalizacaoAdicionar";
-			this.ddlLocalizacaoAdicionar.Size = new System.Drawing.Size(224, 21);
-			this.ddlLocalizacaoAdicionar.TabIndex = 14;
-			this.ddlLocalizacaoAdicionar.ValueMember = "nsu_Localizacao";
+			this.ddlLocalizacao.Location = new System.Drawing.Point(360, 168);
+			this.ddlLocalizacao.Name = "ddlLocalizacao";
+			this.ddlLocalizacao.Size = new System.Drawing.Size(224, 21);
+			this.ddlLocalizacao.TabIndex = 14;
+			this.ddlLocalizacao.Text = "(Selecionar)";
 			// 
 			// btnNovoTipoMidia
 			// 
@@ -502,7 +413,6 @@ namespace ItensLibrary
 			this.btnNovoTipoMidia.Size = new System.Drawing.Size(176, 23);
 			this.btnNovoTipoMidia.TabIndex = 13;
 			this.btnNovoTipoMidia.Text = "Cadastrar Novo Tipo de Mídia";
-			this.btnNovoTipoMidia.Click += new System.EventHandler(this.btnNovoTipoMidia_Click);
 			// 
 			// btnNovoGenero
 			// 
@@ -511,7 +421,6 @@ namespace ItensLibrary
 			this.btnNovoGenero.Size = new System.Drawing.Size(176, 23);
 			this.btnNovoGenero.TabIndex = 12;
 			this.btnNovoGenero.Text = "Cadastrar Novo Gênero";
-			this.btnNovoGenero.Click += new System.EventHandler(this.btnNovoGenero_Click);
 			// 
 			// btnGravar
 			// 
@@ -519,7 +428,6 @@ namespace ItensLibrary
 			this.btnGravar.Name = "btnGravar";
 			this.btnGravar.TabIndex = 11;
 			this.btnGravar.Text = "Gravar";
-			this.btnGravar.Click += new System.EventHandler(this.btnGravar_Click);
 			// 
 			// btnImagemFilme
 			// 
@@ -547,25 +455,21 @@ namespace ItensLibrary
 			this.labelImagemFilme.TabIndex = 8;
 			this.labelImagemFilme.Text = "Imagem:";
 			// 
-			// ddlTipoMidiaFilmeAdicionar
+			// ddlTipoMidiaFilme
 			// 
-			this.ddlTipoMidiaFilmeAdicionar.DisplayMember = "nm_TipoMidia";
-			this.ddlTipoMidiaFilmeAdicionar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.ddlTipoMidiaFilmeAdicionar.Location = new System.Drawing.Point(120, 80);
-			this.ddlTipoMidiaFilmeAdicionar.Name = "ddlTipoMidiaFilmeAdicionar";
-			this.ddlTipoMidiaFilmeAdicionar.Size = new System.Drawing.Size(224, 21);
-			this.ddlTipoMidiaFilmeAdicionar.TabIndex = 7;
-			this.ddlTipoMidiaFilmeAdicionar.ValueMember = "nsu_TipoMidia";
+			this.ddlTipoMidiaFilme.Location = new System.Drawing.Point(120, 80);
+			this.ddlTipoMidiaFilme.Name = "ddlTipoMidiaFilme";
+			this.ddlTipoMidiaFilme.Size = new System.Drawing.Size(224, 21);
+			this.ddlTipoMidiaFilme.TabIndex = 7;
+			this.ddlTipoMidiaFilme.Text = "(Selecionar)";
 			// 
-			// ddlGeneroFilmeAdicionar
+			// ddlGeneroFilme
 			// 
-			this.ddlGeneroFilmeAdicionar.DisplayMember = "nm_Genero";
-			this.ddlGeneroFilmeAdicionar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.ddlGeneroFilmeAdicionar.Location = new System.Drawing.Point(120, 48);
-			this.ddlGeneroFilmeAdicionar.Name = "ddlGeneroFilmeAdicionar";
-			this.ddlGeneroFilmeAdicionar.Size = new System.Drawing.Size(224, 21);
-			this.ddlGeneroFilmeAdicionar.TabIndex = 6;
-			this.ddlGeneroFilmeAdicionar.ValueMember = "nsu_Genero";
+			this.ddlGeneroFilme.Location = new System.Drawing.Point(120, 48);
+			this.ddlGeneroFilme.Name = "ddlGeneroFilme";
+			this.ddlGeneroFilme.Size = new System.Drawing.Size(224, 21);
+			this.ddlGeneroFilme.TabIndex = 6;
+			this.ddlGeneroFilme.Text = "(Selecionar)";
 			// 
 			// dateTimePickerDataAquisicaoFilme
 			// 
@@ -610,11 +514,12 @@ namespace ItensLibrary
 			this.labelNomeFilme.TabIndex = 0;
 			this.labelNomeFilme.Text = "Nome:";
 			// 
-			// UserControlFilmes
+			// UserControlJogos
 			// 
 			this.Controls.Add(this.tabControlFilmes);
-			this.Name = "UserControlFilmes";
+			this.Name = "UserControlJogos";
 			this.Size = new System.Drawing.Size(616, 512);
+			this.Load += new System.EventHandler(this.UserControlJogos_Load);
 			this.tabControlFilmes.ResumeLayout(false);
 			this.tabPagePesquisar.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).EndInit();
@@ -630,109 +535,17 @@ namespace ItensLibrary
 		{
 			if(openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				try
-				{
-					Image imagemOriginal = Image.FromFile(openFileDialog1.FileName);
-					Image imagemResized = ResizeImage(imagemOriginal, pictureBox1.Width, pictureBox1.Height, true);
-					pictureBox1.Image = imagemResized;
-					pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-
-					binaryImagedata = StreamFile(openFileDialog1.FileName);
-				}
-				catch
-				{
-					MessageBox.Show ("Não foi possível adicionar a imagem!", "Erro!", 
-						MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-					return;
-				}
+				//System.IO.StreamReader sr = new 
+				//	System.IO.StreamReader(openFileDialog1.FileName);
+				pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+				//MessageBox.Show(sr.ReadToEnd());
+				//sr.Close();
 			}
 		}
 
-		private void btnNovoGenero_Click(object sender, System.EventArgs e)
+		private void UserControlJogos_Load(object sender, System.EventArgs e)
 		{
-			NovosTipos tipoGenero = new NovosTipos("Gênero de Filme");
-			tipoGenero.Show();
+		
 		}
-
-		private void btnLocalizacao_Click(object sender, System.EventArgs e)
-		{
-			NovosTipos tipoLocalizacao = new NovosTipos("Localização");
-			tipoLocalizacao.Show();
-		}
-
-		private void btnNovoTipoMidia_Click(object sender, System.EventArgs e)
-		{
-			NovosTipos tipoMidiaFilme = new NovosTipos("Tipo de Mídia de Filme");
-			tipoMidiaFilme.Show();
-		}
-
-		private void btnGravar_Click(object sender, System.EventArgs e)
-		{
-			if (txtNomeFilme.Text == "")
-			{
-				MessageBox.Show ("Não foi digitado um nome para o filme!", "Erro!", 
-					MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-				txtNomeFilme.Focus();
-				return;
-			}
-
-			FilmeAtual.Nome = txtNomeFilme.Text;
-			FilmeAtual.DataAquisicao = dateTimePickerDataAquisicaoFilme.Value;
-			FilmeAtual.IDGenero = Convert.ToInt32(ddlGeneroFilmeAdicionar.SelectedValue);
-			FilmeAtual.IDTipoMidia = Convert.ToInt32(ddlTipoMidiaFilmeAdicionar.SelectedValue);
-			FilmeAtual.IDLocalizacao = Convert.ToInt32(ddlLocalizacaoAdicionar.SelectedValue);
-
-			ItensLibrary.DO.FilmeDO.Gravar(FilmeAtual);
-
-			// GRAVAR IMAGEM DEPOIS
-		}
-
-		#region Métodos Auxiliares
-		// Extraído de: http://snippets.dzone.com/posts/show/4336
-		public Image ResizeImage(Image FullsizeImage, int NewWidth, int MaxHeight, bool OnlyResizeIfWider)
-		{
-			// Prevent using images internal thumbnail
-			FullsizeImage.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
-			FullsizeImage.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
-
-			if (OnlyResizeIfWider)
-			{
-				if (FullsizeImage.Width <= NewWidth)
-				{
-					NewWidth = FullsizeImage.Width;
-				}
-			}
-
-			int NewHeight = FullsizeImage.Height * NewWidth / FullsizeImage.Width;
-			if (NewHeight > MaxHeight)
-			{
-				// Resize with height instead
-				NewWidth = FullsizeImage.Width * MaxHeight / FullsizeImage.Height;
-				NewHeight = MaxHeight;
-			}
-
-			Image NewImage = FullsizeImage.GetThumbnailImage(NewWidth, NewHeight, null, IntPtr.Zero);
-			return NewImage;
-
-			// Clear handle to original file so that we can overwrite it if necessary
-			//FullsizeImage.Dispose();
-		}
-
-		// Extraído de: http://www.dotnetspider.com/resources/4515-convert-file-into-byte-array.aspx
-		private byte[] StreamFile(string filename)
-		{
-			FileStream fs = new FileStream(filename, FileMode.Open,FileAccess.Read);
-
-			// Create a byte array of file stream length
-			byte[] ImageData = new byte[fs.Length];
-
-			//Read block of bytes from stream into the byte array
-			fs.Read(ImageData,0,System.Convert.ToInt32(fs.Length));
-
-			//Close the File Stream
-			fs.Close();
-			return ImageData; //return the byte data
-		}
-		#endregion
 	}
 }

@@ -89,16 +89,31 @@
                     AssemblyName = "System.Xml"
                     HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
+                <Reference
+                    Name = "System.Runtime.Serialization.Formatters.Soap"
+                    AssemblyName = "System.Runtime.Serialization.Formatters.Soap"
+                    HintPath = "..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Runtime.Serialization.Formatters.Soap.dll"
+                />
             </References>
         </Build>
         <Files>
             <Include>
+                <File
+                    RelPath = "App.config"
+                    BuildAction = "None"
+                />
                 <File
                     RelPath = "App.ico"
                     BuildAction = "Content"
                 />
                 <File
                     RelPath = "AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Conexao.cs"
+                    SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
@@ -109,6 +124,16 @@
                 <File
                     RelPath = "FilmesUserControl.resx"
                     DependentUpon = "FilmesUserControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "JogosUserControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "JogosUserControl.resx"
+                    DependentUpon = "JogosUserControl.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
@@ -130,6 +155,56 @@
                     RelPath = "MainForm.resx"
                     DependentUpon = "MainForm.cs"
                     BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "NovosTipos.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "NovosTipos.resx"
+                    DependentUpon = "NovosTipos.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Objetos.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Util.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "viewState.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DO\FilmeDO.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DO\GeneroFilmeDO.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DO\LocalizacaoDO.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DO\PessoaDO.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DO\TipoMidiaFilmeDO.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
                 />
             </Include>
         </Files>
